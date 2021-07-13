@@ -6,7 +6,6 @@ import net.sourceforge.jdatepicker.JDatePicker;
 import javax.swing.*;
 import java.awt.*;
 
-
 public class InputPanel extends JPanel {
 
     private JLabel nameLbl;
@@ -20,7 +19,6 @@ public class InputPanel extends JPanel {
     private JDatePicker bDayChooser;
     private JTextArea addressTxt;
     private JComboBox empStatus;
-
 
     public InputPanel() {
         initPanel();
@@ -101,59 +99,59 @@ public class InputPanel extends JPanel {
     }
 
     public JLabel getPhoneLbl() {
-        if(phoneLbl==null){
-            phoneLbl=new JLabel("Phone Number :");
+        if (phoneLbl == null) {
+            phoneLbl = new JLabel("Phone Number :");
         }
         return phoneLbl;
     }
 
     public JLabel getGenderLbl() {
-        if (genderLbl==null){
-            genderLbl=new JLabel("Gender * :");
+        if (genderLbl == null) {
+            genderLbl = new JLabel("Gender * :");
         }
         return genderLbl;
     }
 
     public JLabel getAddressLbl() {
-        if (addressLbl==null){
-            addressLbl=new JLabel("Address :");
+        if (addressLbl == null) {
+            addressLbl = new JLabel("Address :");
         }
 
         return addressLbl;
     }
 
     public JLabel getEmpStatusLbl() {
-        if (empStatusLbl==null){
-            empStatusLbl=new JLabel("Employment Status :");
+        if (empStatusLbl == null) {
+            empStatusLbl = new JLabel("Employment Status :");
         }
         return empStatusLbl;
     }
 
     public JTextField getNameTxtFld() {
-        if(nameTxtFld==null){
-            nameTxtFld=new JTextField();
+        if (nameTxtFld == null) {
+            nameTxtFld = new JTextField();
         }
         return nameTxtFld;
     }
 
     public JTextField getPhoneTxtFld() {
-        if(phoneTxtFld==null){
-            phoneTxtFld=new JTextField();
+        if (phoneTxtFld == null) {
+            phoneTxtFld = new JTextField();
 
         }
         return phoneTxtFld;
     }
 
     public JTextArea getAddressTxtArea() {
-        if(addressTxt==null){
-            addressTxt=new JTextArea();
+        if (addressTxt == null) {
+            addressTxt = new JTextArea();
         }
         return addressTxt;
     }
 
     public JComboBox getEmpStatusDropDown() {
-        if(empStatus==null){
-            empStatus=new JComboBox();
+        if (empStatus == null) {
+            empStatus = new JComboBox();
             empStatus.addItem(new ComboBoxItem(1, "Part Time"));
             empStatus.addItem(new ComboBoxItem(2, "Retired"));
             empStatus.addItem(new ComboBoxItem(3, "Student"));

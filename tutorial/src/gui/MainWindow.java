@@ -1,7 +1,6 @@
 package gui;
 
 import helper.UIMediator;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -15,13 +14,10 @@ public class MainWindow extends JFrame {
     private UIMediator mediator;
 
     public MainWindow() {
-        //mekedi object eke hadala nemene eka hinda use karanne
-        // this keyword eka mokada jframe eka extend karala tina hinda
         initFrame();
-        this.mediator=new UIMediator(getInputPanel(),getButtonPanel(), getPatientListView());
+        this.mediator = new UIMediator(getInputPanel(), getButtonPanel(), getPatientListView());
         this.setLayout(new GridBagLayout());
         initPanels();
-
     }
 
     private void initPanels() {
@@ -50,7 +46,7 @@ public class MainWindow extends JFrame {
 
     private void initFrame() {
         this.setSize(800, 900);
-        this.setLocation(300,0);
+        this.setLocation(300, 0);
         this.setTitle("Patient Registration");
         this.setResizable(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,23 +64,23 @@ public class MainWindow extends JFrame {
 
 
     public ButtonPanel getButtonPanel() {
-        if (buttonPanel== null){
-            buttonPanel=new ButtonPanel();
+        if (buttonPanel == null) {
+            buttonPanel = new ButtonPanel();
         }
         return buttonPanel;
     }
 
     public JPanel getSearchCriteriaPanel() {
-        if (searchCriteriaPanel==null){
-            searchCriteriaPanel=new SearchCriteriaPanel();
+        if (searchCriteriaPanel == null) {
+            searchCriteriaPanel = new SearchCriteriaPanel();
         }
         return searchCriteriaPanel;
     }
 
 
     public PatientListViewPanel getPatientListView() {
-        if (patientListViewPanel ==null){
-            patientListViewPanel =new PatientListViewPanel();
+        if (patientListViewPanel == null) {
+            patientListViewPanel = new PatientListViewPanel();
         }
         return patientListViewPanel;
     }

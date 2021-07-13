@@ -1,6 +1,5 @@
 package gui;
 
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -36,20 +35,17 @@ public class ButtonPanel extends JPanel {
                 new Insets(5, 5, 5, 5), 5, 5));
     }
 
-
     public JButton getCloseBtn() {
-        if(closeBtn==null){
-            closeBtn=new JButton("Close");
-
+        if (closeBtn == null) {
+            closeBtn = new JButton("Close");
         }
         return closeBtn;
     }
 
     public JButton getSaveBtn() {
-        if(saveBtn==null){
-            saveBtn=new JButton("Save");
+        if (saveBtn == null) {
+            saveBtn = new JButton("Save");
             saveBtn.setEnabled(false);
-
         }
         return saveBtn;
     }

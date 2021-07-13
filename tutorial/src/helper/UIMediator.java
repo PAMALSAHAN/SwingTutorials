@@ -1,95 +1,54 @@
 package helper;
 
-import data.PatientData;
 import gui.ButtonPanel;
 import gui.InputPanel;
 import gui.PatientListViewPanel;
-
-import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import listner.TableClickActionListeners;
+import listner.TableMouseListeners;
+import listner.TableDocumentListeners;
 
 
-public class UIMediator implements DocumentListener {
-
+public class UIMediator {
 
     private InputPanel inputPanel;
     private ButtonPanel btnPanel;
     private PatientListViewPanel patientListViewPanel;
-    private PatientData patientData;
-
+    private TableMouseListeners tableMouseListeners;
+    private TableClickActionListeners tableClickActionListeners;
+    private TableDocumentListeners tableDocumentListeners;
 
     public UIMediator(InputPanel inputPanel, ButtonPanel btnPanel, PatientListViewPanel patientListViewPanel) {
         this.inputPanel = inputPanel;
         this.btnPanel = btnPanel;
         this.patientListViewPanel = patientListViewPanel;
-        registerDocListeners();
-        btnPanel.getSaveBtn().addActionListener(this :: addingPatientDataToTable);
-    }
-
-    private void addingPatientDataToTable(ActionEvent actionEvent) {
-        patientData = new PatientData();
-        patientData.setName(inputPanel.getNameTxtFld().getText());
-        patientData.setAddress(inputPanel.getAddressTxtArea().getText());
-        patientData.setPhoneNumber(inputPanel.getPhoneTxtFld().getText());
-        patientData.setEmpType(inputPanel.getEmpStatusDropDown().getSelectedItem().toString());
-        patientListViewPanel.addPatientDataToModel(patientData);
+        addListenersToTable(btnPanel, patientListViewPanel);
 
     }
 
-
-    private void registerDocListeners() {
-        inputPanel.getNameTxtFld().getDocument().addDocumentListener(this);
-        inputPanel.getPhoneTxtFld().getDocument().addDocumentListener(this);
-        inputPanel.getAddressTxtArea().getDocument().addDocumentListener(this);
+    private void addListenersToTable(ButtonPanel btnPanel, PatientListViewPanel patientListViewPanel) {
+        getTableDocumentListeners().registerDocListeners();
+        btnPanel.getSaveBtn().addActionListener(getClickActionListeners()::addingPatientDataToTable);
+        patientListViewPanel.getPatientDataTable().addMouseListener(getMouseListeners());
     }
 
-    private void docChanged() throws BadLocationException {
-
-
-        if (inputPanel.getNameTxtFld().getDocument().getLength() > 0) {
-            btnPanel.getSaveBtn().setEnabled(true);
+    public TableMouseListeners getMouseListeners() {
+        if (tableMouseListeners == null) {
+            tableMouseListeners = new TableMouseListeners(patientListViewPanel);
         }
-
-        String regex = "[0-9]+";
-        Document phoneDoc = inputPanel.getPhoneTxtFld().getDocument();
-        if (!phoneDoc.getText(0,phoneDoc.getLength()).matches(regex) &&  inputPanel.getPhoneTxtFld().getText().length()!=0){
-            JOptionPane.showMessageDialog(this.inputPanel,"Please use only numbers");
-
-        }
+        return tableMouseListeners;
     }
 
-    @Override
-    public void insertUpdate(DocumentEvent e) {
-        try {
-            docChanged();
-        } catch (BadLocationException badLocationException) {
-            badLocationException.printStackTrace();
+    public TableClickActionListeners getClickActionListeners() {
+        if (tableClickActionListeners == null) {
+            tableClickActionListeners = new TableClickActionListeners(inputPanel, patientListViewPanel);
         }
+        return tableClickActionListeners;
     }
 
-    @Override
-    public void removeUpdate(DocumentEvent e) {
-        try {
-            docChanged();
-        } catch (BadLocationException badLocationException) {
-            badLocationException.printStackTrace();
+    public TableDocumentListeners getTableDocumentListeners() {
+        if (tableDocumentListeners == null) {
+            tableDocumentListeners = new TableDocumentListeners(inputPanel, btnPanel);
         }
+        return tableDocumentListeners;
     }
-
-    @Override
-    public void changedUpdate(DocumentEvent e) {
-        try {
-            docChanged();
-        } catch (BadLocationException badLocationException) {
-            badLocationException.printStackTrace();
-        }
-    }
-
-
 }

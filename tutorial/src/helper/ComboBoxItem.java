@@ -18,7 +18,7 @@ public class ComboBoxItem {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return value;
     }
 }

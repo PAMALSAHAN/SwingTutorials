@@ -2,6 +2,7 @@ package data;
 
 
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,5 +62,12 @@ public class PatientTableModel extends AbstractTableModel {
         fireTableRowsInserted(patientDataList.size() - 1, patientDataList.size() - 1);
     }
 
+    //delete row
+    public void removeRow(int row) {
+        // remove a row from your internal data structure
+
+        this.patientDataList.remove(row);
+        fireTableRowsDeleted(row, row);
+    }
 
 }

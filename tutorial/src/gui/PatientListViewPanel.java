@@ -1,9 +1,12 @@
 package gui;
+
 import data.PatientData;
 import data.PatientTableModel;
 import javax.swing.*;
 import java.awt.*;
+
 public class PatientListViewPanel extends JPanel {
+
     private PatientTableModel patientTableModel;
     private JTable patientTable;
     private JScrollPane jScrollPane;
@@ -14,7 +17,7 @@ public class PatientListViewPanel extends JPanel {
 
     private void initPanel() {
         this.setBackground(Color.blue);
-        patientTableModel = new PatientTableModel();
+        this.getPatientTableModel();
         this.setLayout(new GridBagLayout());
         addComponentToPanel();
     }
@@ -26,16 +29,17 @@ public class PatientListViewPanel extends JPanel {
     private void addTable() {
         this.add(getScrollPane(), new GridBagConstraints(0, 0, 0, 0,
                 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
-                    new Insets(5, 5, 5, 5), 5, 5));
+                new Insets(5, 5, 5, 5), 5, 5));
     }
 
     public void addPatientDataToModel(PatientData patientData) {
         patientTableModel.setPatientData(patientData);
     }
 
-    private JTable getPatientDataTable() {
+    public JTable getPatientDataTable() {
         if (patientTable == null) {
             patientTable = new JTable();
+            patientTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
             patientTable.setModel(patientTableModel);
         }
         return patientTable;
@@ -50,4 +54,10 @@ public class PatientListViewPanel extends JPanel {
         return jScrollPane;
     }
 
+    public PatientTableModel getPatientTableModel() {
+        if (patientTableModel == null) {
+            patientTableModel = new PatientTableModel();
+        }
+        return patientTableModel;
+    }
 }
